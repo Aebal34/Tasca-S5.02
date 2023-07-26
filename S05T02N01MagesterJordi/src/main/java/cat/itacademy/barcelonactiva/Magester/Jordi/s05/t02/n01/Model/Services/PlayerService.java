@@ -1,7 +1,10 @@
 package cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Services;
 
+import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Player;
+import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto.PlayerDto;
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,4 +17,9 @@ public class PlayerService implements IPlayerService{
         this.playerRepository = playerRepository;
     }
 
+    @Override
+    public ResponseEntity<Player> addPlayer(PlayerDto playerDto) {
+
+        return null;
+    }
 }
