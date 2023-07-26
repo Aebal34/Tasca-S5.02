@@ -36,4 +36,17 @@ public class PlayerService implements IPlayerService{
 
 
     }
+
+    @Override
+    public ResponseEntity<Player> editPlayerNickname(int id, String nickname) {
+
+        Player player = playerRepository.findById(id).orElse(null);
+        if(player != null){
+            player.setNickname(nickname);
+            playerRepository.save(player);
+            return ResponseEntity.ok(player);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

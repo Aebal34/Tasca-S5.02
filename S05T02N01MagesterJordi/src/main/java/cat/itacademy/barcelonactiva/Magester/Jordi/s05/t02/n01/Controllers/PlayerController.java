@@ -5,10 +5,7 @@ import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto.PlayerD
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Services.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/players")
@@ -27,5 +24,9 @@ public class PlayerController {
         return playerService.createPlayer(playerDto);
     }
 
+    @PutMapping
+    public ResponseEntity<Player> editPlayerNickname(@RequestParam int id, @RequestParam String nickname){
+        return playerService.editPlayerNickname(id, nickname);
+    }
 
 }

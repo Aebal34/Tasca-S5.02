@@ -7,4 +7,6 @@ import org.springframework.http.ResponseEntity;
 public interface IPlayerService {
 
     ResponseEntity<Player> createPlayer(PlayerDto playerDto);
+
+    ResponseEntity<Player> editPlayerNickname(int id, String nickname);
 }
