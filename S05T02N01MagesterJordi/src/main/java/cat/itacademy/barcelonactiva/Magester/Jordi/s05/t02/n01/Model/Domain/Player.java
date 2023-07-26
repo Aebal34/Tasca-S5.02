@@ -16,6 +16,8 @@ public class Player {
 
     private String email;
 
+    private String password;
+
     @OneToMany(mappedBy = "player")
     private List<Game> games;
 }
