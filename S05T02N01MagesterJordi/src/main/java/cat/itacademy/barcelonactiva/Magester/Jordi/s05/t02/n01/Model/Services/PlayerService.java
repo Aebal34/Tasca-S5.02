@@ -18,8 +18,22 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<Player> addPlayer(PlayerDto playerDto) {
+    public ResponseEntity<Player> createPlayer(PlayerDto playerDto) {
 
-        return null;
+        if (playerDto != null) {
+
+            Player player = new Player();
+            player.setEmail(playerDto.getEmail());
+            player.setPassword(playerDto.getPassword());
+            player.setNickname(playerDto.getNickname());
+            player.setGames(playerDto.getGames());
+            playerRepository.save(player);
+            return ResponseEntity.ok(player);
+
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
+
+
     }
 }

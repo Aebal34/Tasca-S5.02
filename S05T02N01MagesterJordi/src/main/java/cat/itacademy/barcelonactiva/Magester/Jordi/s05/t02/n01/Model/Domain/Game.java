@@ -1,9 +1,16 @@
 package cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "games")
+@Getter
+@Setter
+@AllArgsConstructor
 public class Game {
 
     @Id

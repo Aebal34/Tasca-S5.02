@@ -6,5 +6,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface IPlayerService {
 
-    ResponseEntity<Player> addPlayer(PlayerDto playerDto);
+    ResponseEntity<Player> createPlayer(PlayerDto playerDto);
 }
