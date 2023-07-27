@@ -1,5 +1,6 @@
 package cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +27,6 @@ public class Player {
     private String password;
 
     @OneToMany(mappedBy = "player")
+    @JsonManagedReference
     private List<Game> games;
 }
