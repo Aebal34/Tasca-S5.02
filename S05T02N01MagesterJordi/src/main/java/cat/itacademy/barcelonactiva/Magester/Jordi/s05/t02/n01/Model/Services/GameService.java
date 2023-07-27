@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GameService implements IGameService{
 
     @Autowired
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
     public GameService(GameRepository gameRepository){
         this.gameRepository = gameRepository;
@@ -24,5 +26,13 @@ public class GameService implements IGameService{
         game.setPlayer(player);
         gameRepository.save(game);
         return ResponseEntity.ok(game);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteGamesFromPlayer(Player player) {
+        List<Game> games = gameRepository.getByPlayer(player);
+
+        gameRepository.deleteAll(games);
+        return ResponseEntity.ok("Games deleted successfully.");
     }
 }

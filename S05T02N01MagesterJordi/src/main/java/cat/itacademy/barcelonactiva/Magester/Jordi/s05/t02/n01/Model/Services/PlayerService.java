@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerService implements IPlayerService{
 
@@ -65,6 +67,18 @@ public class PlayerService implements IPlayerService{
     public ResponseEntity<Player> getPlayerById(int id) {
         Player player = playerRepository.findById(id).orElse(null);
         if(player!=null){
+            return ResponseEntity.ok(player);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<Player> deleteGamesFromPlayer(int id) {
+        Player player = playerRepository.findById(id).orElse(null);
+        if(player != null){
+            player.getGames().clear();
+            playerRepository.save(player);
             return ResponseEntity.ok(player);
         }else{
             return ResponseEntity.notFound().build();

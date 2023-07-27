@@ -8,4 +8,5 @@ public interface IGameService {
 
     ResponseEntity<Game> rollDice(Player player);
 
+    ResponseEntity<String> deleteGamesFromPlayer(Player player);
 }

@@ -5,6 +5,8 @@ import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Play
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto.PlayerDto;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface IPlayerService {
 
     ResponseEntity<Player> createPlayer(PlayerDto playerDto);
@@ -14,4 +16,6 @@ public interface IPlayerService {
     ResponseEntity<Player> playDiceRoll(int id, Game game);
 
     ResponseEntity<Player> getPlayerById(int id);
+
+    ResponseEntity<Player> deleteGamesFromPlayer(int id);
 }
