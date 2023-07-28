@@ -10,6 +10,4 @@ public class GameDto {
 
     private int result;
 
-    private int playerId;
-
 }

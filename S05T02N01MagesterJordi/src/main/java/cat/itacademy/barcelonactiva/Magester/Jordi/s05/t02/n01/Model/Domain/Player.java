@@ -26,7 +26,15 @@ public class Player {
 
     private String password;
 
+    private int wins;
+
+    private int averageWins;
+
     @OneToMany(mappedBy = "player")
     @JsonManagedReference
     private List<Game> games;
+
+    public void addWin(){
+        wins++;
+    }
 }

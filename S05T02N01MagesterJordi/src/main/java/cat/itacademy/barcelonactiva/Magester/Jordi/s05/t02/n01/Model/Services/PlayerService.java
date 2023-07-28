@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,6 @@ public class PlayerService implements IPlayerService{
             player.setEmail(playerDto.getEmail());
             player.setPassword(playerDto.getPassword());
             player.setNickname(playerDto.getNickname());
-            player.setGames(playerDto.getGames());
             playerRepository.save(player);
             return ResponseEntity.ok(player);
 
@@ -56,6 +56,11 @@ public class PlayerService implements IPlayerService{
         Player player = playerRepository.findById(id).orElse(null);
         if (player != null) {
             player.getGames().add(game);
+            if(game.getResult() == 7){
+                player.addWin();
+            }
+            player.setAverageWins((int)((double) player.getWins() /
+                                                    player.getGames().size() * 100));
             playerRepository.save(player);
             return ResponseEntity.ok(player);
         }else{
@@ -74,14 +79,70 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<Player> deleteGamesFromPlayer(int id) {
+    public ResponseEntity<PlayerDto> deleteGamesFromPlayer(int id) {
         Player player = playerRepository.findById(id).orElse(null);
         if(player != null){
+            //Clear wins, average and games.
             player.getGames().clear();
+            player.setWins(0);
+            player.setAverageWins(0);
             playerRepository.save(player);
-            return ResponseEntity.ok(player);
+            //Return nickname of player whose games have been deleted
+            PlayerDto playerDto = new PlayerDto();
+            playerDto.setNickname(player.getNickname());
+            return ResponseEntity.ok(playerDto);
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Override
+    public ResponseEntity<List<PlayerDto>> getAllPlayersAverage() {
+
+        List<Player> players = playerRepository.findAll();
+        List<PlayerDto> playerDtos = new ArrayList<>();
+
+        for(Player player : players){
+
+            PlayerDto playerDto = new PlayerDto();
+            playerDto.setNickname(player.getNickname());
+            playerDto.setAverageWins(player.getAverageWins());
+            playerDtos.add(playerDto);
+        }
+        return ResponseEntity.ok(playerDtos);
+    }
+
+    @Override
+    public ResponseEntity<List<Integer>> getAllAverageResults() {
+        List<Integer> averageResults = new ArrayList<>();
+        for(Player player : playerRepository.findAll()){
+            averageResults.add(player.getAverageWins());
+        }
+        return ResponseEntity.ok(averageResults);
+    }
+
+    @Override
+    public ResponseEntity<PlayerDto> getBestPlayer() {
+        PlayerDto playerDto = new PlayerDto();
+        for(Player player : playerRepository.findAll()){
+            if(player.getAverageWins() > playerDto.getAverageWins()){
+                playerDto.setAverageWins(player.getAverageWins());
+                playerDto.setNickname(player.getNickname());
+            }
+        }
+        return ResponseEntity.ok(playerDto);
+    }
+
+    @Override
+    public ResponseEntity<PlayerDto> getWorstPlayer() {
+        PlayerDto playerDto = new PlayerDto();
+        playerDto.setAverageWins(100);
+        for(Player player : playerRepository.findAll()){
+            if(player.getAverageWins() < playerDto.getAverageWins()){
+                playerDto.setAverageWins(player.getAverageWins());
+                playerDto.setNickname(player.getNickname());
+            }
+        }
+        return ResponseEntity.ok(playerDto);
     }
 }

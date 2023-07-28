@@ -2,11 +2,13 @@ package cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Services;
 
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Game;
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Player;
+import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto.GameDto;
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,5 +36,16 @@ public class GameService implements IGameService{
 
         gameRepository.deleteAll(games);
         return ResponseEntity.ok("Games deleted successfully.");
+    }
+
+    @Override
+    public ResponseEntity<List<GameDto>> getGamesFromPlayer(Player player) {
+        List<GameDto> gameDtos = new ArrayList<>();
+        for(Game game : player.getGames()){
+            GameDto gameDto = new GameDto();
+            gameDto.setResult(game.getResult());
+            gameDtos.add(gameDto);
+        }
+        return ResponseEntity.ok(gameDtos);
     }
 }

@@ -1,11 +1,11 @@
 package cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto;
 
-import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Game;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PlayerDto {
 
     private int id;
@@ -16,7 +16,7 @@ public class PlayerDto {
 
     private String password;
 
-    private List<Game> games;
+    private int averageWins;
 
     public PlayerDto(String nickname, String email, String password){
         this.nickname=nickname;
