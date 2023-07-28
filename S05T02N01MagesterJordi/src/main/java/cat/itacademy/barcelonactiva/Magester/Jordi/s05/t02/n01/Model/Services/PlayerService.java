@@ -39,7 +39,7 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<Player> editPlayerNickname(int id, String nickname) {
+    public ResponseEntity<Player> editPlayerNickname(String id, String nickname) {
 
         Player player = playerRepository.findById(id).orElse(null);
         if(player != null){
@@ -52,7 +52,7 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<Player> playDiceRoll(int id, Game game) {
+    public ResponseEntity<Player> playDiceRoll(String id, Game game) {
         Player player = playerRepository.findById(id).orElse(null);
         if (player != null) {
             player.getGames().add(game);
@@ -69,7 +69,7 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<Player> getPlayerById(int id) {
+    public ResponseEntity<Player> getPlayerById(String id) {
         Player player = playerRepository.findById(id).orElse(null);
         if(player!=null){
             return ResponseEntity.ok(player);
@@ -79,7 +79,7 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
-    public ResponseEntity<PlayerDto> deleteGamesFromPlayer(int id) {
+    public ResponseEntity<PlayerDto> deleteGamesFromPlayer(String id) {
         Player player = playerRepository.findById(id).orElse(null);
         if(player != null){
             //Clear wins, average and games.

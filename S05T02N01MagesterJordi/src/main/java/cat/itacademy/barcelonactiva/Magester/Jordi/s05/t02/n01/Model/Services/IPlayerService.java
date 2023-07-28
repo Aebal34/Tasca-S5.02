@@ -12,13 +12,13 @@ public interface IPlayerService {
 
     ResponseEntity<Player> createPlayer(PlayerDto playerDto);
 
-    ResponseEntity<Player> editPlayerNickname(int id, String nickname);
+    ResponseEntity<Player> editPlayerNickname(String id, String nickname);
 
-    ResponseEntity<Player> playDiceRoll(int id, Game game);
+    ResponseEntity<Player> playDiceRoll(String id, Game game);
 
-    ResponseEntity<Player> getPlayerById(int id);
+    ResponseEntity<Player> getPlayerById(String id);
 
-    ResponseEntity<PlayerDto> deleteGamesFromPlayer(int id);
+    ResponseEntity<PlayerDto> deleteGamesFromPlayer(String id);
 
     ResponseEntity<List<PlayerDto>> getAllPlayersAverage();
 

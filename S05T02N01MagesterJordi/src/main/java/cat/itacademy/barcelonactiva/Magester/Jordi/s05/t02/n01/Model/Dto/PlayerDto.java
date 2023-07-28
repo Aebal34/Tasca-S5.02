@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlayerDto {
 
-    private int id;
+    private String id;
 
     private String nickname;
 

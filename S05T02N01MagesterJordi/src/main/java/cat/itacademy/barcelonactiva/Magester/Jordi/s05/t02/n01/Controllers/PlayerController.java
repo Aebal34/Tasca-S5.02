@@ -35,12 +35,12 @@ public class PlayerController {
     }
 
     @PutMapping
-    public ResponseEntity<Player> editPlayerNickname(@RequestParam int id, @RequestParam String nickname){
+    public ResponseEntity<Player> editPlayerNickname(@RequestParam String id, @RequestParam String nickname){
         return playerService.editPlayerNickname(id, nickname);
     }
 
     @PostMapping("/{id}/games")
-    public ResponseEntity<Game> playDiceRoll(@PathVariable("id") int id){
+    public ResponseEntity<Game> playDiceRoll(@PathVariable("id") String id){
 
         Player player = playerService.getPlayerById(id).getBody();
         Game game = gameService.rollDice(player).getBody();
@@ -51,7 +51,7 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{id}/games")
-    public ResponseEntity<PlayerDto> deleteGames(@PathVariable("id") int id){
+    public ResponseEntity<PlayerDto> deleteGames(@PathVariable("id") String id){
         gameService.deleteGamesFromPlayer(playerService.getPlayerById(id).getBody());
         return playerService.deleteGamesFromPlayer(id);
     }
@@ -63,7 +63,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}/games")
-    public ResponseEntity<List<GameDto>> getPlayerGames(@PathVariable("id") int id){
+    public ResponseEntity<List<GameDto>> getPlayerGames(@PathVariable("id") String id){
         Player player = playerService.getPlayerById(id).getBody();
 
         if(player != null){

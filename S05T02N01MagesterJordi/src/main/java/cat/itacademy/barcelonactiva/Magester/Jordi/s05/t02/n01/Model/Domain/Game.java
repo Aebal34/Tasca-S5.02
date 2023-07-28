@@ -6,21 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "games")
+@Document(collection = "games")
 @Getter
 @Setter
 @AllArgsConstructor
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     private int result;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Player player;
 

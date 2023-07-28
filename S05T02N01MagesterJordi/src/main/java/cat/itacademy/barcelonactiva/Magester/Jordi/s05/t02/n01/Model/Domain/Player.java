@@ -6,19 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Entity
-@Table(name = "players")
+@Document(collection = "players")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     private String nickname;
 
@@ -30,7 +29,6 @@ public class Player {
 
     private int averageWins;
 
-    @OneToMany(mappedBy = "player")
     @JsonManagedReference
     private List<Game> games;
 

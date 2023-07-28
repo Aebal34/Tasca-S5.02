@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class GameDto {
 
-    private Long id;
+    private String id;
 
     private int result;
 
