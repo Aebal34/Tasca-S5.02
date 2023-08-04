@@ -34,7 +34,6 @@ public class SecurityConfiguration {
         http.authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-
         return http.build();
     }
 }
