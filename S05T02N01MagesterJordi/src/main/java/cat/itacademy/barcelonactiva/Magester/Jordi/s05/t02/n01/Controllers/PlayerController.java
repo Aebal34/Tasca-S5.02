@@ -7,6 +7,7 @@ import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Dto.PlayerD
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Services.IGameService;
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Services.IPlayerService;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
