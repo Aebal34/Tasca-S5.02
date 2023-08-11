@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
+import java.util.List;
 import java.util.Optional;
 
 @DataMongoTest
@@ -19,14 +20,14 @@ public class PlayerRepositoryTest {
     @Autowired
     private PlayerRepository playerRepository;
 
-    //Arrange
-    Player player = Player.builder()
-            .email("john123@mail.com")
-            .nickname("Johny4")
-            .build();
-
     @Test
     public void PlayerRepository_Save_ReturnsSavedPlayer(){
+
+        //Arrange
+        Player player = Player.builder()
+                .email("john123@mail.com")
+                .nickname("Johny4")
+                .build();
 
         //Act
         Player savedPlayer = playerRepository.save(player);
@@ -48,4 +49,14 @@ public class PlayerRepositoryTest {
         assertThat(savedPlayer.getNickname()).isEqualTo("Helen456");
     }
 
+    @Test
+    public void PlayerRepository_FindAll_ReturnsPlayerList(){
+
+        //Act
+        List<Player> players = playerRepository.findAll();
+
+        //Assert
+        assertThat(players).isNotEmpty();
+        assertThat(players).hasOnlyElementsOfType(Player.class);
+    }
 }
