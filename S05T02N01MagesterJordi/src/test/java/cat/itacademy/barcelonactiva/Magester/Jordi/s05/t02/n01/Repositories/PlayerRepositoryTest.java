@@ -20,14 +20,14 @@ public class PlayerRepositoryTest {
     @Autowired
     private PlayerRepository playerRepository;
 
+    //Arrange
+    Player player = Player.builder()
+            .email("john123@mail.com")
+            .nickname("Johny4")
+            .build();
+
     @Test
     public void PlayerRepository_Save_ReturnsSavedPlayer(){
-
-        //Arrange
-        Player player = Player.builder()
-                .email("john123@mail.com")
-                .nickname("Johny4")
-                .build();
 
         //Act
         Player savedPlayer = playerRepository.save(player);
@@ -35,6 +35,9 @@ public class PlayerRepositoryTest {
         //Assert
         assertThat(savedPlayer).isNotNull();
         assertThat(savedPlayer.getId()).isNotNull();
+
+        //CleanUp
+        playerRepository.delete(player);
     }
 
     @Test
