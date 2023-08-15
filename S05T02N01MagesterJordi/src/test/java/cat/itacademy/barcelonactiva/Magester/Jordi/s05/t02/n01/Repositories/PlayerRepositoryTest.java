@@ -4,9 +4,6 @@ import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Domain.Play
 import cat.itacademy.barcelonactiva.Magester.Jordi.s05.t02.n01.Model.Repositories.PlayerRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.AfterClass;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;

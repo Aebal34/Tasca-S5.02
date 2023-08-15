@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface GameRepository extends MongoRepository<Game, String> {
 
-    public List<Game> getByPlayer(Player player);
+    List<Game> getByPlayer(Player player);
 }
