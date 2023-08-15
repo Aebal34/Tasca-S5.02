@@ -30,6 +30,9 @@ public class GameRepositoryTest {
         //Assert
         assertThat(savedGame).isNotNull();
         assertThat(savedGame.getPlayer()).isNotNull();
+
+        //CleanUp
+        gameRepository.delete(game);
     }
 
     @Test
@@ -68,5 +71,9 @@ public class GameRepositoryTest {
         //Assert
         assertThat(playersGames).isNotEmpty();
         assertThat(playersGames.size()).isEqualTo(2);
+
+        //CleanUp
+        gameRepository.delete(game);
+        gameRepository.delete(game1);
     }
 }
