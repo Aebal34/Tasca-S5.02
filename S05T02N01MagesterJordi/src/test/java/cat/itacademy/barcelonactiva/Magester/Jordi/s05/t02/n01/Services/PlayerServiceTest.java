@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -94,4 +96,30 @@ public class PlayerServiceTest {
         assertThat(rolledPlayer.getGames().size()).isEqualTo(1);
 
     }
+
+    @Test
+    public void PlayerService_DeleteGamesFromPlayer_ReturnsPlayerDto(){
+
+        //Arrange
+        List<Game> games = new ArrayList<>(List.of(new Game(), new Game(), new Game()));
+
+        Player player = Player.builder()
+                .id("64c3e5c17d9af96907b99f51")
+                .nickname("Emily123")
+                .games(games)
+                .build();
+
+        //Act
+        when(playerRepository.findById(Mockito.any(String.class))).thenReturn(Optional.ofNullable(player));
+        when(playerRepository.save(Mockito.any(Player.class))).thenReturn(player);
+        PlayerDto playerDto = playerService.deleteGamesFromPlayer(player.getId()).getBody();
+
+        //Assert
+        assertThat(playerDto).isNotNull();
+        assertThat(playerDto.getNickname()).isEqualTo(player.getNickname());
+        assertThat(player.getGames()).isEmpty();
+    }
+
+    @Test
+
 }
