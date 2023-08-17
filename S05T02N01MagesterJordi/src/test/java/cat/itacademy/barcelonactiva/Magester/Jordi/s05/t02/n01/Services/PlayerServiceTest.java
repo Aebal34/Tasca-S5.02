@@ -94,7 +94,6 @@ public class PlayerServiceTest {
         assertThat(rolledPlayer).isNotNull();
         assertThat(rolledPlayer.getGames()).isNotEmpty();
         assertThat(rolledPlayer.getGames().size()).isEqualTo(1);
-
     }
 
     @Test
@@ -121,5 +120,42 @@ public class PlayerServiceTest {
     }
 
     @Test
+    public void PlayerService_getAllPlayersAverage_ReturnsListOfPlayerDto(){
+
+        //Arrange
+        Player player1 = Player.builder()
+                .nickname("Johny1")
+                .id("64c3e5c17d9af96907b99f51")
+                .averageWins(35)
+                .games(new ArrayList<>())
+                .build();
+        Player player2 = Player.builder()
+                .id("64c3e5c17d9af96907b99f52")
+                .nickname("Johny2")
+                .averageWins(60)
+                .games(new ArrayList<>())
+                .build();
+        Player player3 = Player.builder()
+                .id("64c3e5c17d9af96907b99f53")
+                .nickname("Johny3")
+                .averageWins(55)
+                .games(new ArrayList<>())
+                .build();
+        List<Player> players = new ArrayList<>(List.of(player1, player2, player3));
+
+        //Act
+        when(playerRepository.findAll()).thenReturn(players);
+        List<PlayerDto> playerDtos = playerService.getAllPlayersAverage().getBody();
+
+        //Assert
+        int avgWins = 0;
+        assertThat(playerDtos).isNotEmpty();
+        for(PlayerDto playerDto : playerDtos){
+            assertThat(playerDto.getAverageWins()).isNotZero();
+            avgWins += playerDto.getAverageWins();
+        }
+        assertThat(avgWins/playerDtos.size()).isEqualTo(50);
+    }
+
 
 }
